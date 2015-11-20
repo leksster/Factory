@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Factory do
   context "::Model" do
-    before(:all) do
+    before(:each) do
       @metaclass = Factory::Model.new(:first_name, :second_name, :address)
       @instance_of_class = @metaclass.new("Alex", "Smith", 49125)
       @obj1 = @metaclass.new("John", "Du", 2)
@@ -62,7 +62,7 @@ describe Factory do
     end
 
     it '#inspect' do
-      expect(@instance_of_class.inspect).to eq("first_name='Alex', second_name='Smith', address=49125")
+      expect(@instance_of_class.inspect).to eq("first_name='Alex', second_name='Smith', address='49125'")
     end
 
     it '#members' do

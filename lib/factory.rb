@@ -45,11 +45,12 @@ module Factory
         alias_method :to_h, :hash
 
         define_method :inspect do
-          @pairs.map { |name, value| "#{name}=#{value}" }.join(', ')
+          @pairs.map { |name, value| "#{name}='#{value}'" }.join(', ')
         end
         alias_method :to_s, :inspect
 
         define_method :members do
+          args
         end
 
         define_method :select do |&block|
@@ -57,13 +58,20 @@ module Factory
         end
 
         define_method :size do
-
+          @values.length
         end
+        alias_method :length, :size
 
         define_method :values do
           @values
         end
         alias_method :to_a, :values
+
+        define_method :values_at do |*args|
+          result = []
+          args.each { |arg| result << @values[arg] }
+          result
+        end
 
       end
     end
